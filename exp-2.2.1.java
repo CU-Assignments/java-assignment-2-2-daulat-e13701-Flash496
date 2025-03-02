@@ -4,22 +4,20 @@ import java.util.Scanner;
 
 public class IntegerSumCalculator {
 
-    // Method to parse a string into an Integer
     public static Integer parseStringToInteger(String str) {
         try {
-            return Integer.parseInt(str); // Autoboxing occurs here
+            return Integer.parseInt(str);
         } catch (NumberFormatException e) {
             System.out.println("Invalid number format: " + str);
-            return null; // Return null for invalid input
+            return null;
         }
     }
 
-    // Method to calculate the sum of a list of Integers
     public static int calculateSum(List<Integer> numbers) {
         int sum = 0;
         for (Integer num : numbers) {
             if (num != null) {
-                sum += num; // Unboxing occurs here
+                sum += num;
             }
         }
         return sum;
@@ -38,7 +36,7 @@ public class IntegerSumCalculator {
             }
             Integer number = parseStringToInteger(input);
             if (number != null) {
-                numbers.add(number); // Autoboxing happens here
+                numbers.add(number);
             }
         }
 
