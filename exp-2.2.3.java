@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-// Employee class implementing Serializable
 class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
     private int id;
@@ -16,7 +15,6 @@ class Employee implements Serializable {
         this.salary = salary;
     }
 
-    // Display employee details
     public void display() {
         System.out.println("Employee ID: " + id + ", Name: " + name + ", Designation: " + designation + ", Salary: " + salary);
     }
@@ -24,13 +22,12 @@ class Employee implements Serializable {
 
 public class EmployeeManagement {
     private static final String FILE_NAME = "employees.ser";
-    private static final Scanner scanner = new Scanner(System.in); // Global scanner instance
+    private static final Scanner scanner = new Scanner(System.in);
 
-    // Add an employee and save to file
     public static void addEmployee() {
         System.out.print("Enter Employee ID: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine();
         System.out.print("Enter Employee Name: ");
         String name = scanner.nextLine();
         System.out.print("Enter Designation: ");
@@ -43,18 +40,16 @@ public class EmployeeManagement {
         System.out.println("Employee added successfully!");
     }
 
-    // Save employee to file using serialization
     public static void saveEmployeeToFile(Employee employee) {
         List<Employee> employees = readEmployeesFromFile();
         employees.add(employee);
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             oos.writeObject(employees);
         } catch (IOException e) {
-            e.printStackTrace(); // Better debugging
+            e.printStackTrace();
         }
     }
 
-    // Display all employees
     public static void displayAllEmployees() {
         List<Employee> employees = readEmployeesFromFile();
         if (employees.isEmpty()) {
@@ -66,16 +61,14 @@ public class EmployeeManagement {
         }
     }
 
-    // Read employees from file
-    @SuppressWarnings("unchecked") // Suppresses unchecked cast warning
+    @SuppressWarnings("unchecked")
     public static List<Employee> readEmployeesFromFile() {
         List<Employee> employees = new ArrayList<>();
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             employees = (List<Employee>) ois.readObject();
         } catch (FileNotFoundException e) {
-            // No action needed if file not found (first run scenario)
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace(); // Better debugging
+            e.printStackTrace();
         }
         return employees;
     }
